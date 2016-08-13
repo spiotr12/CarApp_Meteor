@@ -1,10 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
+import { Schema } from '../schema';
+
 export const Cars = new Mongo.Collection('cars', {idGeneration: 'Mongo'});
 
 // Attach schema
-// TODO: Cars.attachSchema(Schema.Cars);
+Cars.attachSchema(Schema.Cars);
 
 if(Meteor.isServer){
 	// Meteor publication that pushed data from server to client
