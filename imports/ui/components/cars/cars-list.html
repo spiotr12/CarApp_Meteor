@@ -1,0 +1,17 @@
+<template name="cars_list">
+    <h3>Cars list</h3>
+    <ul class="list-group">
+        <li class="list-group-item active">Available cars:</li>
+        {{#each cars}}
+            {{>car_item}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="car_item">
+    <li class="list-group-item">
+        <strong>Make:</strong> {{make}},
+        <strong>Model:</strong> {{model}},
+        <strong>Age:</strong> {{age}}
+    </li>
+</template>
