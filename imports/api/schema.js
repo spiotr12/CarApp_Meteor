@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 export const Schema = {
-	Cars: new SimpleSchema({
+	cars: new SimpleSchema({
 		_id: {
 			type: Meteor.Collection.ObjectID,
 			label: 'id',
