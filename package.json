@@ -1,10 +1,11 @@
 {
-  "name": "Car App",
+  "name": "CarApp",
   "private": true,
   "scripts": {
     "start": "meteor run"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
+    "meteor-node-stubs": "~0.2.0",
+    "winston": "^2.2.0"
   }
 }
