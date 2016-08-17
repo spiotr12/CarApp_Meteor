@@ -2,8 +2,8 @@
 import winston from 'winston';
 import fs from 'fs';
 
-const logDir = '../../../../logs';
-// const logDir = 'logs';
+// const logDir = '../../../../logs';
+const logDir = 'logs';	// use this logDir to have new log every time server is build (development)
 
 // Create the log directory if it does not exist
 if (!fs.existsSync(logDir)) {
@@ -15,9 +15,9 @@ export const Logger = new (winston.Logger)({
 	transports: [
 		new (winston.transports.Console)({
 			level: 'debug',
-			formatter: function (options) {
-				return 'cust format:\t' + options.level.toUpperCase() + '\t' + options.message;
-			},
+			// formatter: function (options) {
+			// 	return 'cust format:\t' + options.level.toUpperCase() + '\t' + options.message;
+			// },
 		}),
 		new (winston.transports.File)({
 			level: 'debug',
