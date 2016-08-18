@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-import { Logger as Log } from '../../api/winston-logger';
+import { Logger as Log } from '../../api/util/winston-logger';
 
 import '../../api/cars/cars';
 

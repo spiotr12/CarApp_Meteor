@@ -1,3 +1,16 @@
 <template name="cars_form">
-    <h3>Cars_form</h3>
+
+    <h3>Cars_autoForm</h3>
+
+    <div class="">
+        {{#autoForm collection=carsCollection schema=carsSchema id="insertCarAutoForm" type="insert"}}
+            <fieldset>
+                {{> afQuickField name='make'}}
+                {{> afQuickField name='model'}}
+                {{> afQuickField name='age'}}
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Insert</button>
+        {{/autoForm}}
+    </div>
+
 </template>

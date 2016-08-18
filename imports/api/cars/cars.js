@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-import { Schema } from '../schema';
+import { Schema } from '../util/schema';
 
 export const Cars = new Mongo.Collection('cars', {idGeneration: 'Mongo'});
 
