@@ -3,7 +3,7 @@
     <h3>Cars_autoForm</h3>
 
     <div class="">
-        {{#autoForm collection=carsCollection schema=carsSchema id="insertCarAutoForm" type="insert"}}
+        {{#autoForm collection=carsCollection id="insertCarAutoForm" type="method" meteormethod="cars.insert"}}
             <fieldset>
                 {{> afQuickField name='make'}}
                 {{> afQuickField name='model'}}
