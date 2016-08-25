@@ -5,6 +5,7 @@ export const CarsSchemaData = {
 	_id: {
 		type: Meteor.Collection.ObjectID,
 		label: 'id',
+		// optional: true,
 		autoValue: function () {
 			if (this.isInsert) {
 				return new Meteor.Collection.ObjectID();

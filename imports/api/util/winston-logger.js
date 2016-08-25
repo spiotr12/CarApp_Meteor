@@ -1,34 +1,53 @@
 "use strict";
 import { Meteor } from 'meteor/meteor';
 
+// prepare
+let logger;
+const env = process.env.NODE_ENV;
+
+const logFormat = function (options) {
+	return options.timestamp() + ' '
+		+ '[' + options.level.toUpperCase() + '] '
+		+ (undefined !== options.message ? options.message : '')
+		+ (options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : '' );
+}
+
 if (Meteor.isServer) {
 
-	// import winston from 'winston';
-	// import fs from 'fs';
-
+	// Import npm packages
 	let winston = Npm.require('winston');
 	let fs = Npm.require('fs');
 
 	const debugLogDir = '../../../../logs-debug';
-	const logDir = 'logs';	// use this logDir to have new log every time server is build (development)
+	const logDir = 'logs';	// use this logDir to have new log every time server is build (development) (?)
 
 	// Create the app log directory if it does not exist
 	if (!fs.existsSync(logDir)) {
+		if (env === 'development') {
+			console.log('Directory \"logdir\" missing. Creating logDir');
+		}
 		fs.mkdirSync(logDir);
 	}
 
-	// Create the debug log directory if it does not exist
-	if (!fs.existsSync(debugLogDir)) {
-		fs.mkdirSync(debugLogDir);
+	if (env === 'development') {
+		// Create the debug log directory if it does not exist
+		if (!fs.existsSync(debugLogDir)) {
+			console.log('Directory \"debugLogDir\" missing. Creating debugLogDir');
+			fs.mkdirSync(debugLogDir);
+		}
 	}
 
+	// Setup custom logger
 
-	/*
-	 (winston.config.syslog.levels)
-	 levels:	emerg=0, alert=1, crit=2, error=3, warning=4, notice=5, info=6, debug=7
-	 */
+	logger = new (winston.Logger)({
+		levels: (winston.config.syslog.levels),
+		// (winston.config.syslog.levels):	emerg=0, alert=1, crit=2, error=3, warning=4, notice=5, info=6, debug=7
+	});
 
-	let appLogger = new (winston.transports.File)({
+
+	// Prepare custom transports
+
+	const appLoggerOptions = {
 		name: 'app-logger',
 		level: 'info',
 		json: false,
@@ -37,15 +56,12 @@ if (Meteor.isServer) {
 		},
 		formatter: function (options) {
 			// Return string will be passed to logger.
-			return options.timestamp() + ' '
-				+ '[' + options.level.toUpperCase() + '] '
-				+ (undefined !== options.message ? options.message : '')
-				+ (options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : '' );
+			return logFormat(options);
 		},
 		filename: `${logDir}/app.log`,
-	});
+	};
 
-	let debugLogger = new (winston.transports.File)({
+	const debugLoggerOptions = {
 		name: 'debug-logger',
 		level: 'debug',
 		json: false,
@@ -54,36 +70,24 @@ if (Meteor.isServer) {
 		},
 		formatter: function (options) {
 			// Return string will be passed to logger.
-			return options.timestamp() + ' '
-				+ '[' + options.level.toUpperCase() + '] '
-				+ (undefined !== options.message ? options.message : '')
-				+ (options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : '' );
+			return logFormat(options);
 		},
 		filename: `${debugLogDir}/debug.log`,
-	});
+	};
 
-	export const Logger = new (winston.Logger)({
-		levels: (winston.config.syslog.levels),
-		transports: [
-			// Console
-			new (winston.transports.Console)({
-				level: 'debug',
-				colorize: true,
-			}),
-			// App.log
-			appLogger,
-			// Debug.log
-			debugLogger,
-		]
-	});
-} else {
-	export const Logger = {
-		debug(message){
-			console.log(message);
-		},
-		info(message){
-			console.log(message);
-		},
+	const constoleLoggerOptions = {
+		level: env === 'development' ? 'debug' : 'info',
+		colorize: true,
+	}
+
+	// add transports
+	logger.add(winston.transports.Console, constoleLoggerOptions);
+	logger.add(winston.transports.File, appLoggerOptions);
+
+	if (env === 'development') {
+		logger.add(winston.transports.File, debugLoggerOptions);
 	}
 }
 
+// Export Logger
+export const Logger = logger;
