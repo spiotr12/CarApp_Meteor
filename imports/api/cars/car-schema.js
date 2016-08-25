@@ -10,8 +10,10 @@ export const CarsSchema = new SimpleSchema({
 			if (this.isInsert) {
 				return new Meteor.Collection.ObjectID();
 			} else if (this.isUpdate) {
+				// TODO: car _id on update autoValue
 				console.log('TODO: car _id on update autoValue');
 			} else {
+				// TODO: car _id on else autoValue
 				console.log('TODO: car _id on else autoValue')
 			}
 		},
