@@ -1,13 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-import { Schema } from '../util/schema';
+import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+import { CarsSchema } from './car-schema';
 import { Logger } from '../util/winston-logger';
 
 export const Cars = new Mongo.Collection('cars', { idGeneration: 'Mongo' });
 
 // Attach schema
-Cars.attachSchema(Schema.cars);
+Cars.attachSchema(CarsSchema);
 
 if (Meteor.isServer) {
 	// Meteor publication that pushed data from server to client
@@ -21,9 +23,11 @@ Meteor.methods({
 		if (Meteor.isServer) {
 			Logger.info('Adding new car:', doc);
 
-			Cars.simpleSchema().validate(doc);
+			// Validating
+			// Cars.simpleSchema().validate(doc);
+			// Validation not necessary since
 
-			Cars.insert(doc);
+			Cars.insert(testCar);
 		}
 	}
 });

@@ -1,11 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-export const CarsSchemaData = {
+export const CarsSchema = new SimpleSchema({
 	_id: {
 		type: Meteor.Collection.ObjectID,
 		label: 'id',
-		// optional: true,
+		optional: true,
 		autoValue: function () {
 			if (this.isInsert) {
 				return new Meteor.Collection.ObjectID();
@@ -64,4 +64,4 @@ export const CarsSchemaData = {
 			omit: true,	// for autoValue to take an effect
 		},
 	},
-};
+});
