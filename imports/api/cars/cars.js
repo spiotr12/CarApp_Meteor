@@ -3,8 +3,8 @@ import { Mongo } from 'meteor/mongo';
 
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { CarsSchema } from './car-schema';
 import { Logger } from '../util/winston-logger';
+import { CarsSchema } from './cars-schema';
 
 export const Cars = new Mongo.Collection('cars', { idGeneration: 'Mongo' });
 
