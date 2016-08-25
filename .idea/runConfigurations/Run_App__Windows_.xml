@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run App" type="meteor-app-runner" factoryName="Meteor">
-    <option name="exePath" value="/usr/local/bin/meteor" />
+  <configuration default="false" name="Run App (Windows)" type="meteor-app-runner" factoryName="Meteor" singleton="false">
+    <option name="exePath" value="$USER_HOME$/AppData/Local/.meteor/meteor.bat" />
     <option name="startBrowserSettings">
       <browser url="http://localhost:3000" />
     </option>
