@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run App in Production" type="meteor-app-runner" factoryName="Meteor" singleton="false" programParameters="--settings settings-production.json">
+  <configuration default="false" name="Run App (Windows) in Development" type="meteor-app-runner" factoryName="Meteor" singleton="false" programParameters="--settings settings-development.json">
     <option name="envs">
-      <entry key="NODE_ENV" value="production" />
+      <entry key="NODE_ENV" value="development" />
     </option>
-    <option name="exePath" value="/usr/local/bin/meteor" />
+    <option name="exePath" value="$USER_HOME$/AppData/Local/.meteor/meteor.bat" />
     <option name="startBrowserSettings">
       <browser url="http://localhost:3000" />
     </option>
