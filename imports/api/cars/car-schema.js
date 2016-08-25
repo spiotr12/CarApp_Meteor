@@ -34,7 +34,8 @@ export const CarsSchema = new SimpleSchema({
 		min: 0,
 		autoform: {
 			afFieldInput: {
-				type: "text"
+				type: "text",
+				min: 0,
 			}
 		}
 	},

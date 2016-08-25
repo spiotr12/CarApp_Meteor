@@ -6,10 +6,10 @@ import { Cars } from '../../../api/cars/cars';
 
 import './cars-form.html';
 
-AutoForm.debug();
+// AutoForm.debug();
 
 Template.cars_form.onCreated(function carsFormOnCreated(){
-	Meteor.subscribe('carsCollection');
+	Meteor.subscribe('cars');
 });
 
 Template.cars_form.helpers({
@@ -18,13 +18,13 @@ Template.cars_form.helpers({
 	},
 });
 
-// AutoForm.hooks({
-// 	insertCarAutoForm: {
-// 		//TODO
-// 		onSubmit: function(){
-// 			console.log('adding car');
-// 			this.done();
-// 			return false;
-// 		},
-// 	}
-// });
+AutoForm.hooks({
+	insertCarAutoForm: {
+		onSubmit: function(doc){
+			// console.log('Adding new car (autoform)', doc);
+			Meteor.call('cars.insert', doc);
+			this.done();
+			return false;
+		},
+	}
+});

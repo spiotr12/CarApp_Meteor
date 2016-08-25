@@ -13,7 +13,7 @@ Cars.attachSchema(CarsSchema);
 
 if (Meteor.isServer) {
 	// Meteor publication that pushed data from server to client
-	Meteor.publish('carsCollection', function carsPublication() {
+	Meteor.publish('cars', function carsPublication() {
 		return Cars.find();
 	});
 }
@@ -27,7 +27,7 @@ Meteor.methods({
 			// Cars.simpleSchema().validate(doc);
 			// Validation not necessary since
 
-			Cars.insert(testCar);
+			Cars.insert(doc);
 		}
 	}
 });
