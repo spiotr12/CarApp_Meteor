@@ -1,9 +1,17 @@
 <template name="cars_page">
+
+    {{>make_insert_modal_button}}
+
     <h2>Cars Home</h2>
+
     <div class="col-md-4 col-md-offset-2">
         {{>cars_form}}
     </div>
+
     <div class="col-md-4">
         {{>cars_list}}
     </div>
+
+    {{>make_insert_modal}}
+
 </template>

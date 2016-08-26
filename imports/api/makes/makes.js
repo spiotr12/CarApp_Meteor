@@ -6,7 +6,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Logger } from '../util/winston-logger';
 import { MakesSchema } from './makes-schema';
 
-export const Makes = new Mongo.Collection('cars', { idGeneration: 'Mongo' });
+export const Makes = new Mongo.Collection('makes', { idGeneration: 'Mongo' });
 
 // Attach schema
 Makes.attachSchema(MakesSchema);
@@ -19,5 +19,11 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-
+	'makes.insert'(doc){
+		if (Meteor.isServer) {
+			Logger.info('Registering new car make', doc);
+			Makes.insert(doc);
+			Logger.info('Make added successfully');
+		}
+	}
 });

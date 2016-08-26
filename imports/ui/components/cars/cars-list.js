@@ -6,7 +6,7 @@ import { Cars } from '../../../api/cars/cars';
 import './cars-list.html';
 
 Template.cars_list.onCreated(function carsListOnCreated() {
-	Meteor.subscribe('carsCollection');
+	Meteor.subscribe('cars');
 });
 
 Template.cars_list.helpers({

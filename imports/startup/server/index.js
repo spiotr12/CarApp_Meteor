@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Logger as Log } from '../../api/util/winston-logger';
 
 import '../../api/cars/cars';
+import '../../api/makes/makes';
 
 Meteor.startup(() => {
 	// code to run on server at startup
