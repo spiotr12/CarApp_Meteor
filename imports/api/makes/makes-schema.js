@@ -8,12 +8,6 @@ export const MakesSchema = new SimpleSchema({
 		autoValue: function () {
 			if (this.isInsert) {
 				return new Meteor.Collection.ObjectID();
-			} else if (this.isUpdate) {
-				// TODO: _id on update autoValue
-				console.log('TODO: _id on update autoValue');
-			} else {
-				// TODO: car _id on else autoValue
-				console.log('TODO: _id on else autoValue')
 			}
 		},
 		autoform: {

@@ -18,13 +18,13 @@ Template.cars_form.helpers({
 	},
 });
 
-AutoForm.hooks({
-	insertCarAutoForm: {
-		onSubmit: function(doc){
-			// console.log('Adding new car (autoform)', doc);
-			Meteor.call('cars.insert', doc);
-			this.done();
-			return false;
-		},
-	}
-});
+// AutoForm.hooks({
+// 	insertCarAutoForm: {
+// 		onSubmit: function(doc){
+// 			// console.log('Adding new car (autoform)', doc);
+// 			Meteor.call('cars.insert', doc);
+// 			this.done();
+// 			return false;
+// 		},
+// 	}
+// });

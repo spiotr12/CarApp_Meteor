@@ -6,10 +6,12 @@ let logger;
 const env = process.env.NODE_ENV;
 
 const logFormat = function (options) {
+	// let space = '\t\t\t\t\t\t\t\t\t\t\t';	// 11 tabs
+
 	return options.timestamp() + ' '
 		+ '[' + options.level.toUpperCase() + '] '
 		+ (undefined !== options.message ? options.message : '')
-		+ (options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : '' );
+		+ (options.meta && Object.keys(options.meta).length ? '\n' + JSON.stringify(options.meta, null, '\t') : '' );
 }
 
 if (Meteor.isServer) {
@@ -23,16 +25,14 @@ if (Meteor.isServer) {
 
 	// Create the app log directory if it does not exist
 	if (!fs.existsSync(logDir)) {
-		if (env === 'development') {
-			console.log('Directory \"logdir\" missing. Creating logDir');
-		}
+		console.log('Directory \"logs\" for app.log is missing. Creating logDir');
 		fs.mkdirSync(logDir);
 	}
 
 	if (env === 'development') {
 		// Create the debug log directory if it does not exist
 		if (!fs.existsSync(debugLogDir)) {
-			console.log('Directory \"debugLogDir\" missing. Creating debugLogDir');
+			console.log('Directory \"logs-debug\" for debug.log is missing. Creating debugLogDir');
 			fs.mkdirSync(debugLogDir);
 		}
 	}

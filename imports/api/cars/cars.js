@@ -25,9 +25,23 @@ Meteor.methods({
 
 			// Validating
 			// Cars.simpleSchema().validate(doc);
-			// Validation not necessary since
 
-			Cars.insert(doc);
+			// if(!Cars.simpleSchema().namedContext('insertingCar').validateOne(doc, "make")){
+			// 	Logger.warning('Make not valid in', doc);
+			// 	return;
+			// }
+			// if(!Cars.simpleSchema().namedContext('insertingCar').validateOne(doc, "model")){
+			// 	Logger.warning('Model not valid in', doc);
+			// 	return;
+			// }
+			// if(!Cars.simpleSchema().namedContext('insertingCar').validateOne(doc, "age")){
+			// 	Logger.warning('Age not valid in', doc);
+			// 	return;
+			// }
+
+			// Perform validation since the schema is attached. Uses autoValues as well
+			Cars.insert(doc);	//TODO: catch error and log it
+			Logger.info('Car added successfuly');
 		}
 	}
 });
