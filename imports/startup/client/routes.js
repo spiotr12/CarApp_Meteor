@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
@@ -18,6 +19,10 @@ FlowRouter.route('/', {
 // Cars list
 FlowRouter.route('/cars',{
 	name: 'Cars.home',
+	subscriptions: function(){
+		this.register('carsSub', Meteor.subscribe('cars'));
+		this.register('makesSub', Meteor.subscribe('makes'));
+	},
 	action(){
 		BlazeLayout.render('App_body', {main: 'cars_page'});
 	}

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+import { Makes } from '../makes/makes';
+
 export const CarsSchema = new SimpleSchema({
 	_id: {
 		type: Meteor.Collection.ObjectID,
@@ -14,17 +16,26 @@ export const CarsSchema = new SimpleSchema({
 			omit: true,	// for autoValue to take an effect
 		},
 	},
-	make: {
-		type: String,
-		label: 'make',
+	make_id: {
+		type: Meteor.Collection.ObjectID,
+		label: 'Car make',
+		autoform: {
+			type: "select",
+			options: function () {
+				return Makes.find().map(function (makeItem) {
+					return { label: makeItem.name, value: makeItem._id._str };
+				});
+			},
+
+		}
 	},
 	model: {
 		type: String,
-		label: 'model',
+		label: 'Car model',
 	},
 	age: {
 		type: Number,
-		label: 'age',
+		label: 'Car age',
 		optional: true,
 		min: 0,
 		autoform: {
@@ -36,7 +47,7 @@ export const CarsSchema = new SimpleSchema({
 	},
 	createdAt: {
 		type: Date,
-		label: 'createdAt',
+		label: 'Created at',
 		optional: true,
 		autoValue: function () {
 			if (this.isInsert) {	// on insert
@@ -49,7 +60,7 @@ export const CarsSchema = new SimpleSchema({
 	},
 	modifiedAt: {
 		type: Date,
-		label: 'modifiedAt',
+		label: 'Modified at',
 		optional: true,
 		autoValue: function () {
 			if (this.isUpdate) {	// on update

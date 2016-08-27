@@ -3,11 +3,11 @@
     <h3>Cars_autoForm</h3>
 
     <div class="">
-        {{#autoForm collection=carsCollection id="insertCarAutoForm" type="method" meteormethod="cars.insert" validation="keyup"}}
+        {{#autoForm collection=carsCollection id="insertCarAutoForm" type="method" meteormethod="cars.insert"}}
             <fieldset>
-                {{> afQuickField name='make'}}
-                {{> afQuickField name='model'}}
-                {{> afQuickField name='age'}}
+                {{>afQuickField name='make_id' options=makesOptions}}
+                {{>afQuickField name='model'}}
+                {{>afQuickField name='age'}}
             </fieldset>
             <button type="submit" class="btn btn-primary">Insert</button>
         {{/autoForm}}

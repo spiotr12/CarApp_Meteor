@@ -1,5 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+import { Match } from 'meteor/check';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+
+SimpleSchema.extendOptions({
+	unique: Match.Optional(Boolean),
+});
 
 export const MakesSchema = new SimpleSchema({
 	_id: {
@@ -16,11 +21,12 @@ export const MakesSchema = new SimpleSchema({
 	},
 	name: {
 		type: String,
-		label: 'make_name',
+		label: 'Name of make',
+		unique: true,
 	},
 	createdAt: {
 		type: Date,
-		label: 'createdAt',
+		label: 'Created at',
 		optional: true,
 		autoValue: function () {
 			if (this.isInsert) {	// on insert
@@ -33,7 +39,7 @@ export const MakesSchema = new SimpleSchema({
 	},
 	modifiedAt: {
 		type: Date,
-		label: 'modifiedAt',
+		label: 'Modified at',
 		optional: true,
 		autoValue: function () {
 			if (this.isUpdate) {	// on update

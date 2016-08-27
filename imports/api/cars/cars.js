@@ -6,7 +6,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Logger } from '../util/winston-logger';
 import { CarsSchema } from './cars-schema';
 
-export const Cars = new Mongo.Collection('cars', { idGeneration: 'Mongo' });
+export const Cars = new Mongo.Collection('cars', { idGeneration: 'MONGO' });
 
 // Attach schema
 Cars.attachSchema(CarsSchema);
@@ -43,5 +43,5 @@ Meteor.methods({
 			Cars.insert(doc);	//TODO: catch error and log it
 			Logger.info('Car added successfuly');
 		}
-	}
+	},
 });

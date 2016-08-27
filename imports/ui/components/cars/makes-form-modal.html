@@ -12,9 +12,9 @@
 
                 <div class="modal-body">
                     {{#autoForm collection=makesCollection id="insertMakeAutoForm"
-                                type="method" meteormethod="makes.insert"}}
+                                type="method" meteormethod="makes.insert" validation="keyUp"}}
                         <fieldset>
-                            {{> afQuickField name='name'}}
+                            {{>afQuickField name='name'}}
                         </fieldset>
                         <button type="submit" class="btn btn-primary">Register new make</button>
                     {{/autoForm}}
